@@ -24,10 +24,15 @@ def command_processor(cms):
             print("Invalid Command")
 
 #
-#   TODO: Read the commands from a help.txt file.
+#   Read the commands from a help.txt file.
 #
 def display_help():
-    print("Help to come")
+    fn = open('help.txt', 'r')
+    lines = fn.readlines()
+
+    # Strips the newline character
+    for line in lines:
+        print("{}".format(line.strip()))
 
 #
 #   TODO: List n customers and their policies. If n not provided list them all.
