@@ -1,0 +1,7 @@
+Commands
+--------
+help
+info
+exit
+list <n>
+add <first_name> <family_name> <age>
