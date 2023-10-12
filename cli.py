@@ -59,6 +59,8 @@ def add_customer(cms, command_line):
         customer.family_name = command_line[2]
         customer.age = command_line[3]
         cms.customers.append(customer)
+        # Append the customer to the csv file
+        customer.add(cms.customer_file_name)
     else:
         print("Invalid arguments")
 
