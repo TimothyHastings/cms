@@ -17,7 +17,9 @@ class Customer:
         self.state = ACTIVE
 
     def display(self):
-        print("Customer: ", self.id, self.first_name, self.family_name, self.age, self.risk, self.state)
+        line = str(self.id) + " " + self.first_name + " " + self.family_name + " " + str(self.age) + " " + str(self.risk) + " " + self.state
+        print("{}".format(line.strip()))
+        #print("Customer: ", self.id, self.first_name, self.family_name, self.age, self.risk, self.state)
 
     def add(self, fname):
         f = open(fname, "a")

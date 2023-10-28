@@ -13,6 +13,8 @@ def command_processor(cms):
             display_help()
         elif command == "info":
             print(cms)
+        elif command == "load":
+            load_customers(cms, "customers.csv")
         elif command == "list":
             list_customers(cms, command_line)
         # Add commands here
@@ -51,8 +53,11 @@ def list_customers(cms, command_line):
     for customer in cms.customers:
         customer.display()
 
+#
+#   Add a new customer and append it to the csv file.
+#
 def add_customer(cms, command_line):
-    # add first last age
+    # Add first name, last name and age.
     if len(command_line) == 4:
         customer = Customer()
         customer.first_name = command_line[1]
@@ -64,12 +69,44 @@ def add_customer(cms, command_line):
     else:
         print("Invalid arguments")
 
+#
+#   Find customer by id.
+#   TODO: find by other attributes
+#
 def find_customer(cms, command_line):
     # find id
     id = int(command_line[1])
     for customer in cms.customers:
         if id == customer.id:
-            print("Found")
+            print(customer)
             return
     print("Not Found")
 
+#
+#   Load customers from a csv file.
+#   TODO: handle error conditions.
+#
+def load_customers(cms, fname):
+    f = open(fname, "r")
+    Lines = f.readlines()
+    max_id = 0
+    for line in Lines:
+        data = line.split(",")
+        # Create a customer
+        customer = Customer()
+        customer.id = int(data[0])
+        customer.first_name = data[1]
+        customer.family_name = data[2]
+        customer.age = int(data[3])
+        customer.risk = int(data[4])
+        customer.state = data[5]
+
+        # Add the customer to the customer list
+        cms.customers.append(customer)
+
+        if customer.id > max_id:
+            max_id = customer.id
+
+    # Adjust the Customer next_id
+    Customer.next_id = max_id + 1
+    print(Customer.next_id)
